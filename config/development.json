@@ -1,0 +1,6 @@
+{
+    "name":"My Application development",
+    "mail": {
+        "server" : "dev.mail.server"
+    }
+}

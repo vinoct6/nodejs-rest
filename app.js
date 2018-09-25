@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const logger = require('./logger');
 const morgan = require('morgan');
+const config = require('config');
 
 //Print environments - Reads NODE_ENV
 console.log(`app : ${app.get('env')}`);
@@ -13,10 +14,15 @@ app.use(express.static('public'));
 
 //Use Morgan only for development purposes
 
-if(app.get('env') === 'development'){
-   console.log('use morgan');
+if (app.get('env') === 'development') {
+    console.log('use morgan');
     app.use(morgan('tiny'));
 }
+
+//Use configuration
+console.log(`The name of the application :  ${config.get('name')}`);
+console.log(`Mail server :  ${config.get('mail.server')}`);
+console.log(`Password from environment variable :  ${config.get('mail.password')}`);
 
 const port = process.env.PORT || 3000;
 
