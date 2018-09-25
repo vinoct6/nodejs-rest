@@ -4,6 +4,7 @@ const app = express();
 const logger = require('./logger');
 const morgan = require('morgan');
 const config = require('config');
+const debug = require('debug')('app:startup');
 
 //Print environments - Reads NODE_ENV
 console.log(`app : ${app.get('env')}`);
@@ -15,7 +16,13 @@ app.use(express.static('public'));
 //Use Morgan only for development purposes
 
 if (app.get('env') === 'development') {
-    console.log('use morgan');
+    /*You can enable this using export DEBUG=app:startup, or 
+    DEBUG=app:x,
+    DEBUG=app:*,  
+    or just start with $DEBUG=app:startup node app.js
+    */
+
+    debug('use Morgan');
     app.use(morgan('tiny'));
 }
 
