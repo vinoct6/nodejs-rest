@@ -2,10 +2,21 @@ const Joi = require('joi');
 const express = require('express');
 const app = express();
 const logger = require('./logger');
+const morgan = require('morgan');
+
+//Print environments - Reads NODE_ENV
+console.log(`app : ${app.get('env')}`);
 
 app.use(express.json());
 app.use(logger);
 app.use(express.static('public'));
+
+//Use Morgan only for development purposes
+
+if(app.get('env') === 'development'){
+   console.log('use morgan');
+    app.use(morgan('tiny'));
+}
 
 const port = process.env.PORT || 3000;
 
