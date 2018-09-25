@@ -1,8 +1,10 @@
 const Joi = require('joi');
 const express = require('express');
 const app = express();
+const logger = require('./logger');
 
-app.use(express.json())
+app.use(express.json());
+app.use(logger);
 
 const port = process.env.PORT || 3000;
 
@@ -24,7 +26,7 @@ app.post('/courses', (req, resp) => {
 
     const { error } = validateSchema(req.body);
 
-    if(error) return resp.status(400).send(error);
+    if (error) return resp.status(400).send(error);
 
 
     const course = {
